@@ -5,312 +5,163 @@
 <title>For Farooha ❤️</title>
 
 <style>
-body {
+body{
 margin:0;
 font-family:'Comic Sans MS', cursive;
 text-align:center;
-background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ffe4e1);
 overflow:hidden;
-color:#333;
 }
 
-.screen { display:none; margin-top:70px; }
-.active { display:block; }
+.screen{
+display:none;
+height:100vh;
+width:100vw;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+padding:20px;
+}
 
-h1 { font-size:35px; }
+.active{display:flex;}
 
-p { font-size:18px; }
+.pink{background:#ffb6c1;}
+.red{background:#ff4d6d;color:white;}
+.white{background:#fff0f5;}
 
-button {
-padding:15px 25px;
-font-size:18px;
+h1{font-size:30px;}
+
+button{
+padding:12px 20px;
 border:none;
 border-radius:20px;
-margin:10px;
-cursor:pointer;
 background:#ff4d6d;
 color:white;
+margin:10px;
+cursor:pointer;
 }
 
-button:hover {
-transform:scale(1.05);
-}
-
-input {
-padding:12px;
-border-radius:10px;
-border:none;
-font-size:16px;
-}
-
-img {
-width:260px;
+img,video{
+width:250px;
 border-radius:20px;
-margin-top:10px;
+margin:10px;
 }
 
-video {
-width:260px;
-border-radius:20px;
-margin-top:10px;
-}
-
-/* fade animation */
-.fade {
-animation: fadeIn 2s ease-in-out;
-}
-
-@keyframes fadeIn {
-from {opacity:0;}
-to {opacity:1;}
-}
-
-/* hearts */
-.heart {
-position:absolute;
-animation:float 5s linear infinite;
-}
-
-@keyframes float {
-from {transform:translateY(100vh);}
-to {transform:translateY(-10vh);}
-}
-
-/* caption */
-.caption {
-font-size:18px;
-margin-top:10px;
-color:#555;
-}
+.caption{color:#333;font-size:18px;}
 </style>
 </head>
 
 <body>
 
 <!-- PASSWORD -->
-<div id="login" class="screen active">
-<h1>Only you can unlock this 😏</h1>
-<p>What's my favorite nickname for you?</p>
-<input type="text" id="pass" placeholder="type it here 👀">
-<br><br>
-<button onclick="checkPass()">Enter ❤️</button>
+<div id="login" class="screen active pink">
+<h1>Enter Password ❤️</h1>
+<input id="pass">
+<br>
+<button onclick="check()">Enter</button>
 </div>
 
-<!-- STORY NAME -->
-<div id="story" class="screen">
-<h1 id="name"></h1>
-<p id="storyText"></p>
+<!-- 1 NAME -->
+<div id="namePage" class="screen pink">
+<h1>FARAX MOHAMMED ABDULRAHMAN<br>HANDULE DUALE GERXACHES ❤️</h1>
+<button onclick="next('farooha')">Next</button>
 </div>
 
-<!-- LOADING -->
-<div id="loading" class="screen">
-<h1>Thinking about you… 😌</h1>
-<p id="loadingText"></p>
+<!-- 2 FAROOHA -->
+<div id="farooha" class="screen red">
+<h1>Farooha ❤️</h1>
+<button onclick="next('thinking')">Next</button>
 </div>
 
-<!-- QUIZ -->
-<div id="quiz" class="screen">
-<h1>Be honest 😏</h1>
-<p id="question"></p>
-<button onclick="nextQ()">Yes 💖</button>
-<button onclick="nextQ()">Of course 😌</button>
+<!-- 3 THINKING -->
+<div id="thinking" class="screen white">
+<h1>Thinking & Reminiscing about you… 💭</h1>
+<button onclick="next('time')">Next</button>
 </div>
 
-<!-- FINAL QUESTION -->
-<div id="finalQ" class="screen">
-<h1>DO YOU LOVE ME?</h1>
-<button onclick="love()">A LOT 💖</button>
-<button onclick="love()">SUPER A LOT 😍</button>
+<!-- 4 TIME -->
+<div id="time" class="screen pink">
+<h1>Best 1 Year & 2 Months ❤️</h1>
+<p>You make life soft, beautiful and peaceful 💖</p>
+<button onclick="next('gallery')">Next</button>
 </div>
 
-<!-- SLIDESHOW -->
-<div id="gallery" class="screen">
-<h1>Our little memories ❤️</h1>
+<!-- 5 GALLERY -->
+<div id="gallery" class="screen white">
+<h1>Our Memories ❤️</h1>
 
-<div id="mediaContainer"></div>
-<p id="caption" class="caption"></p>
+<img src="photo1.jpeg">
+<p class="caption">YOU & ME ❤️</p>
 
-<button onclick="nextPhoto()">Next ➜</button>
+<img src="photo2.jpeg">
+<p class="caption">Prettiest eyes in Somaliland 😍</p>
+
+<img src="photo3.jpeg">
+<p class="caption">ETHEREAL ✨</p>
+
+<button onclick="next('voice')">Next</button>
 </div>
 
-<!-- VOICE GATE -->
-<div id="voiceGate" class="screen">
-<h1>Before you continue… 🎤</h1>
-<p>Listen to this first ❤️</p>
-<button onclick="playVoiceAndContinue()">▶️ Play</button>
+<!-- 6 VOICE -->
+<div id="voice" class="screen pink">
+<h1>Voice Messages 🎧</h1>
+
+<audio controls src="voice1.mp3"></audio>
+<audio controls src="voice2.mp3"></audio>
+
+<button onclick="next('music')">Next</button>
 </div>
 
-<!-- FINAL MESSAGE -->
-<div id="final" class="screen">
-<h1>💌</h1>
-<p style="font-size:22px;">
-THIS IS A FOREVER THING.<br>
-I AM GLAD YOU ARE ON BOARD ❤️
-</p>
-</div>
+<!-- 7 MUSIC -->
+<div id="music" class="screen white">
+<h1>Music 🎵</h1>
 
-<!-- MUSIC -->
 <iframe width="0" height="0"
 src="https://www.youtube.com/embed/Pma_IwydPmw?autoplay=1&loop=1"
 frameborder="0"></iframe>
 
+<p>Playing our song ❤️</p>
+
+<button onclick="next('final')">Next</button>
+</div>
+
+<!-- 8 FINAL -->
+<div id="final" class="screen pink">
+<h1>💖 FOREVER THING 💖</h1>
+
+<p>I’m glad we are on board the ship Majifar 🚢❤️</p>
+
+<br>
+
+<h2>I LOVE YOU</h2>
+
+<p>English 🇬🇧</p>
+<p>أحبك 🇸🇦</p>
+<p>Waan ku jeclahay 🇸🇴</p>
+<p>ኣፍቅረኪ 🇪🇷</p>
+<p>Te amo 🇪🇸</p>
+
+<br>
+
+<img src="somaliland.png" width="80">
+<img src="eritrea.png" width="80">
+</div>
+
 <script>
 
-/* PASSWORD */
-function checkPass(){
-let val=document.getElementById("pass").value.toLowerCase().trim();
-if(val==="farooha"){
-startStory();
-} else {
-alert("Try again 😒");
-}
-}
-
-/* SCREEN SWITCH */
 function show(id){
 document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
-/* TYPE NAME */
-function typeText(el, text, speed, cb){
-let i=0;
-el.innerHTML="";
-let inter=setInterval(()=>{
-el.innerHTML+=text.charAt(i);
-i++;
-if(i>=text.length){
-clearInterval(inter);
-if(cb) setTimeout(cb,800);
-}
-},speed);
-}
-
-/* STORY */
-function startStory(){
-show("story");
-
-let name=document.getElementById("name");
-let text=document.getElementById("storyText");
-
-typeText(name,"Farax Mohammed Abdulrahman Handule Duale Gerxaches",50,()=>{
-typeText(name,"Farooha ❤️",80,()=>{
-text.innerHTML="I made this for you… just follow it 😌";
-
-setTimeout(()=>{
-show("loading");
-fakeLoading();
-},2000);
-});
-});
-}
-
-/* LOADING */
-let msgs=[
-"Thinking about you...",
-"It has been an amazing 1 year and 2 months... You make life soft, peaceful and worth living 💚",
-"Almost ready..."
-];
-
-function fakeLoading(){
-let i=0;
-let inter=setInterval(()=>{
-document.getElementById("loadingText").innerText=msgs[i];
-i++;
-if(i>=msgs.length){
-clearInterval(inter);
-show("quiz");
-askQ();
-}
-},1500);
-}
-
-/* QUESTIONS */
-let questions=[
-"Do you miss me?",
-"Am I your favorite person?",
-"Do you smile when you see my name?"
-];
-
-let q=0;
-
-function askQ(){
-document.getElementById("question").innerText=questions[q];
-}
-
-function nextQ(){
-q++;
-if(q<questions.length){
-askQ();
-} else {
-show("finalQ");
+function check(){
+let v=document.getElementById("pass").value.toLowerCase();
+if(v==="farooha"){
+show("namePage");
 }
 }
 
-/* LOVE */
-function love(){
-for(let i=0;i<70;i++){
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="💖";
-h.style.left=Math.random()*100+"vw";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),5000);
-}
-
-setTimeout(()=>showGallery(),1200);
-}
-
-/* SLIDESHOW */
-let media=[
-{type:"image", src:"Photo 1 (1).jpeg", caption:"YOU & ME ❤️"},
-{type:"image", src:"Photo 2.jpeg", caption:"Prettiest eyes in Somaliland 😍"},
-{type:"image", src:"Photo (3).jpeg", caption:"ETHEREAL ✨"},
-{type:"video", src:"hodoo audio.mp4", caption:"Listening to your voice 💚"},
-{type:"video", src:"no 2.mp4", caption:"More memories with you 🎵"}
-];
-let index=0;
-
-function showGallery(){
-show("gallery");
-index=0;
-updatePhoto();
-}
-
-function updatePhoto(){
-let container=document.getElementById("mediaContainer");
-container.innerHTML="";
-
-let current=media[index];
-
-if(current.type==="image"){
-let img=document.createElement("img");
-img.src=current.src;
-container.appendChild(img);
-} else if(current.type==="video"){
-let video=document.createElement("video");
-video.src=current.src;
-video.controls=true;
-container.appendChild(video);
-}
-
-document.getElementById("caption").innerText=current.caption;
-}
-
-function nextPhoto(){
-index++;
-if(index<media.length){
-updatePhoto();
-} else {
-show("voiceGate");
-}
-}
-
-
-
-audio.onended=function(){
-show("final");
-};
+function next(id){
+show(id);
 }
 
 </script>
