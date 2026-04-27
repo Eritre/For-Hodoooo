@@ -9,13 +9,13 @@ body{
 margin:0;
 font-family:'Comic Sans MS', cursive;
 text-align:center;
+background:#ffe4ec;
 overflow:hidden;
 }
 
 .screen{
 display:none;
 height:100vh;
-width:100vw;
 justify-content:center;
 align-items:center;
 flex-direction:column;
@@ -24,85 +24,102 @@ padding:20px;
 
 .active{display:flex;}
 
-.pink{background:#ffb6c1;}
-.red{background:#ff4d6d;color:white;}
-.white{background:#fff0f5;}
-
-h1{font-size:30px;}
-
 button{
-padding:12px 20px;
+padding:12px 18px;
 border:none;
 border-radius:20px;
 background:#ff4d6d;
 color:white;
-margin:10px;
+margin:8px;
 cursor:pointer;
 }
 
 img,video{
-width:250px;
+width:260px;
 border-radius:20px;
-margin:10px;
 }
 
-.caption{color:#333;font-size:18px;}
+.caption{font-size:18px;margin-top:10px;}
 </style>
 </head>
 
 <body>
 
 <!-- PASSWORD -->
-<div id="login" class="screen active pink">
+<div id="login" class="screen active">
 <h1>Enter Password ❤️</h1>
 <input id="pass">
-<br>
 <button onclick="check()">Enter</button>
 </div>
 
-<!-- 1 NAME -->
-<div id="namePage" class="screen pink">
-<h1>FARAX MOHAMMED ABDULRAHMAN<br>HANDULE DUALE GERXACHES ❤️</h1>
+<!-- NAME -->
+<div id="namePage" class="screen">
+<h1>FARAX MOHAMMED ABDULRAHMAN HANDULE ❤️</h1>
 <button onclick="next('farooha')">Next</button>
 </div>
 
-<!-- 2 FAROOHA -->
-<div id="farooha" class="screen red">
+<!-- FAROOHA -->
+<div id="farooha" class="screen">
 <h1>Farooha ❤️</h1>
 <button onclick="next('thinking')">Next</button>
 </div>
 
-<!-- 3 THINKING -->
-<div id="thinking" class="screen white">
-<h1>Thinking & Reminiscing about you… 💭</h1>
+<!-- THINKING -->
+<div id="thinking" class="screen">
+<h1>Thinking about you 💭</h1>
 <button onclick="next('time')">Next</button>
 </div>
 
-<!-- 4 TIME -->
-<div id="time" class="screen pink">
+<!-- TIME -->
+<div id="time" class="screen">
 <h1>Best 1 Year & 2 Months ❤️</h1>
 <p>You make life soft, beautiful and peaceful 💖</p>
-<button onclick="next('gallery')">Next</button>
+<button onclick="next('quiz1')">Next</button>
 </div>
 
-<!-- 5 GALLERY -->
-<div id="gallery" class="screen white">
+<!-- QUIZ 1 -->
+<div id="quiz1" class="screen">
+<h1>Do you love me? 😏</h1>
+<button onclick="next('quiz2')">YES 💖</button>
+<button onclick="next('quiz2')">OF COURSE 😍</button>
+</div>
+
+<!-- QUIZ 2 -->
+<div id="quiz2" class="screen">
+<h1>If you had to choose… 😈</h1>
+<p>Somaliland 🇸🇴 / Ethiopia 🇪🇹 / ME ❤️</p>
+
+<button onclick="next('quiz3')">Somaliland 🇸🇴</button>
+<button onclick="next('quiz3')">Ethiopia 🇪🇹</button>
+<button onclick="next('quiz3')">YOU ❤️</button>
+</div>
+
+<!-- QUIZ 3 -->
+<div id="quiz3" class="screen">
+<h1>Do you miss me? 🥺</h1>
+<button onclick="next('quiz4')">Yes 💔</button>
+<button onclick="next('quiz4')">Yesssssss 😭❤️</button>
+</div>
+
+<!-- QUIZ 4 -->
+<div id="quiz4" class="screen">
+<h1>How much do you love me? 💖</h1>
+<button onclick="next('gallery')">1000 ❤️</button>
+<button onclick="next('gallery')">∞ Infinity ♾️</button>
+</div>
+
+<!-- SLIDESHOW -->
+<div id="gallery" class="screen">
 <h1>Our Memories ❤️</h1>
 
-<img src="photo1.jpeg">
-<p class="caption">YOU & ME ❤️</p>
+<img id="slide" src="photo1.jpeg">
+<p id="cap">YOU & ME ❤️</p>
 
-<img src="photo2.jpeg">
-<p class="caption">Prettiest eyes in Somaliland 😍</p>
-
-<img src="photo3.jpeg">
-<p class="caption">ETHEREAL ✨</p>
-
-<button onclick="next('voice')">Next</button>
+<button onclick="nextSlide()">Next ➜</button>
 </div>
 
-<!-- 6 VOICE -->
-<div id="voice" class="screen pink">
+<!-- VOICE -->
+<div id="voice" class="screen">
 <h1>Voice Messages 🎧</h1>
 
 <audio controls src="voice1.mp3"></audio>
@@ -111,39 +128,32 @@ margin:10px;
 <button onclick="next('music')">Next</button>
 </div>
 
-<!-- 7 MUSIC -->
-<div id="music" class="screen white">
+<!-- MUSIC -->
+<div id="music" class="screen">
 <h1>Music 🎵</h1>
 
-<iframe width="0" height="0"
-src="https://www.youtube.com/embed/Pma_IwydPmw?autoplay=1&loop=1"
-frameborder="0"></iframe>
+<audio id="song" src="music.mp3" loop></audio>
 
-<p>Playing our song ❤️</p>
-
+<button onclick="playMusic()">Play Music ❤️</button>
 <button onclick="next('final')">Next</button>
 </div>
 
-<!-- 8 FINAL -->
-<div id="final" class="screen pink">
+<!-- FINAL -->
+<div id="final" class="screen">
 <h1>💖 FOREVER THING 💖</h1>
 
-<p>I’m glad we are on board the ship Majifar 🚢❤️</p>
-
-<br>
+<p>I’m glad we are on board Majifar 🚢❤️</p>
 
 <h2>I LOVE YOU</h2>
 
 <p>English 🇬🇧</p>
-<p>أحبك 🇸🇦</p>
-<p>Waan ku jeclahay 🇸🇴</p>
-<p>ኣፍቅረኪ 🇪🇷</p>
-<p>Te amo 🇪🇸</p>
+<p>Arabic 🇸🇦 أحبك</p>
+<p>Somali 🇸🇴 Waan ku jeclahay</p>
+<p>Tigrinya 🇪🇷 ኣፍቅረኪ</p>
+<p>Spanish 🇪🇸 Te amo</p>
 
-<br>
-
-<img src="somaliland.png" width="80">
-<img src="eritrea.png" width="80">
+<img src="somaliland.jpg" width="80">
+<img src="eritrea.jpg" width="80">
 </div>
 
 <script>
@@ -153,6 +163,11 @@ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
+function next(id){
+show(id);
+}
+
+/* PASSWORD */
 function check(){
 let v=document.getElementById("pass").value.toLowerCase();
 if(v==="farooha"){
@@ -160,8 +175,29 @@ show("namePage");
 }
 }
 
-function next(id){
-show(id);
+/* SLIDESHOW */
+let slides=[
+{img:"photo1.jpeg",cap:"YOU & ME ❤️"},
+{img:"photo2.jpeg",cap:"Prettiest eyes 😍"},
+{img:"photo3.jpeg",cap:"ETHEREAL ✨"}
+];
+
+let i=0;
+
+function nextSlide(){
+i++;
+if(i>=slides.length){
+show("voice");
+return;
+}
+
+document.getElementById("slide").src=slides[i].img;
+document.getElementById("cap").innerText=slides[i].cap;
+}
+
+/* MUSIC */
+function playMusic(){
+document.getElementById("song").play();
 }
 
 </script>
