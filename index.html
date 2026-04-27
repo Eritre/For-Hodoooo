@@ -10,7 +10,6 @@ margin:0;
 font-family:'Comic Sans MS', cursive;
 text-align:center;
 
-/* 🌸 blended background with your image */
 background:
 linear-gradient(rgba(255,182,193,0.75), rgba(255,192,203,0.75)),
 url("photo4.jpeg");
@@ -39,11 +38,6 @@ background:#ff4d6d;
 color:white;
 margin:8px;
 cursor:pointer;
-transition:0.2s;
-}
-
-button:active{
-transform:scale(1.1);
 }
 
 img,audio{
@@ -51,15 +45,12 @@ width:260px;
 border-radius:20px;
 }
 
-.caption{font-size:18px;margin-top:10px;}
-
-/* 💖 floating hearts */
 .heart-bg{
 position:fixed;
 top:-10vh;
 font-size:20px;
-opacity:0.7;
 animation:fall linear infinite;
+opacity:0.7;
 }
 
 @keyframes fall{
@@ -87,41 +78,42 @@ animation:fall linear infinite;
 <p id="hintText"></p>
 </div>
 
-<!-- NAME -->
+<!-- 1. FULL NAME -->
 <div id="namePage" class="screen">
-<h1>FAROOHA ❤️</h1>
-<h2>MY SOULMATE 💍</h2>
+<h1>
+FARAX MOHAMMED ABDULRAHMAN HANDULE DUALE<br>
+'' GERXACHES ❤️
+</h1>
 
 <button onclick="next('farooha')">Next 💖</button>
 </div>
 
-<!-- FAROOHA -->
+<!-- 2. FAROOHA + SOULMATE -->
 <div id="farooha" class="screen">
-<h1>Farooha ❤️</h1>
+<h1>FAROOHA ❤️</h1>
+<h2>MY SOULMATE 💍</h2>
+
 <button onclick="next('thinking')">Next 💖</button>
 </div>
 
-<!-- THINKING -->
+<!-- 3. REST OF STORY -->
 <div id="thinking" class="screen">
 <h1>Thinking about you 💭</h1>
 <button onclick="next('time')">Next 💖</button>
 </div>
 
-<!-- TIME -->
 <div id="time" class="screen">
 <h1>Best 1 Year & 2 Months ❤️</h1>
 <p>You make life soft, beautiful and peaceful 💖</p>
 <button onclick="next('quiz1')">Next 💖</button>
 </div>
 
-<!-- QUIZ 1 -->
 <div id="quiz1" class="screen">
 <h1>Do you love me? 😏</h1>
 <button onclick="next('quiz2')">YES 💖</button>
 <button onclick="next('quiz2')">OF COURSE 😍</button>
 </div>
 
-<!-- QUIZ 2 -->
 <div id="quiz2" class="screen">
 <h1>Choose 😈</h1>
 <p>Somaliland 🇸🇴 / Ethiopia 🇪🇹 / ME ❤️</p>
@@ -131,14 +123,12 @@ animation:fall linear infinite;
 <button onclick="next('quiz3')">MAJUDI ❤️</button>
 </div>
 
-<!-- QUIZ 3 -->
 <div id="quiz3" class="screen">
 <h1>Do you miss me? 🥺</h1>
 <button onclick="next('quiz4')">Yes 💔</button>
 <button onclick="next('quiz4')">Yesssssss 😭❤️</button>
 </div>
 
-<!-- QUIZ 4 -->
 <div id="quiz4" class="screen">
 <h1>How much do you love me? 💖</h1>
 <button onclick="next('gallery')">1000 ❤️</button>
@@ -167,48 +157,28 @@ animation:fall linear infinite;
 
 <!-- PROPOSAL -->
 <div id="proposal" class="screen">
-<h1>💍 One last question...</h1>
-
-<p>From everything we shared…</p>
-<h2>Will you stay with me forever? ❤️</h2>
+<h1>💍 Will you stay forever? ❤️</h1>
 
 <button onclick="finalYes()">YES 💖</button>
 <button onclick="finalYes()">ALWAYS 😭❤️</button>
 </div>
 
-<!-- MUSIC -->
-<div id="music" class="screen">
-<h1>Music 🎵</h1>
-
-<audio id="song" src="music.mp3" loop></audio>
-
-<button onclick="playMusic()">Play 💖</button>
-<button onclick="next('final')">Next 💖</button>
-</div>
-
-<!-- FINAL -->
+<!-- FINAL MESSAGE (ONLY HERE AT THE END) -->
 <div id="final" class="screen">
-<h1>💖 FOREVER THING 💖</h1>
+<h1>💖 FINAL 💖</h1>
 
-<p>I’m glad we are on board Majudi 🚢❤️</p>
+<p style="font-size:22px;">
+I’m glad we are fully on board Majifar 🚢❤️
+</p>
 
 <h2>KISS 💋💋💋💋💋</h2>
 
 <p>I LOVE YOU</p>
-
-<p>🇬🇧 English</p>
-<p>🇸🇦 أحبك</p>
-<p>🇸🇴 Waan ku jeclahay</p>
-<p>🇪🇷 ኣፍቅረኪ</p>
-<p>🇪🇸 Te amo</p>
-
-<img src="somaliland.jpg" width="80">
-<img src="eritrea.jpg" width="80">
 </div>
 
 <script>
 
-/* NAVIGATION */
+/* NAV */
 function next(id){
 show(id);
 spawnHeart();
@@ -239,14 +209,14 @@ function check(){
 let v=document.getElementById("pass").value.toLowerCase().trim();
 
 if(v==="farooha"){
-spawnHeartBurst();
-setTimeout(()=>next("namePage"),1200);
+spawnBurst();
+setTimeout(()=>next("namePage"),1000);
 } else {
 alert("Try again 😏");
 }
 }
 
-/* HEARTS CONTINUOUS */
+/* HEARTS */
 function spawnHeart(){
 let e=document.createElement("div");
 e.innerHTML="💖";
@@ -257,22 +227,20 @@ document.body.appendChild(e);
 setTimeout(()=>e.remove(),6000);
 }
 
-/* HEART BURST */
-function spawnHeartBurst(){
+setInterval(spawnHeart,300);
+
+/* BURST */
+function spawnBurst(){
 for(let i=0;i<30;i++){
 let e=document.createElement("div");
 e.innerHTML="💖";
 e.style.position="absolute";
 e.style.left=Math.random()*100+"vw";
 e.style.top="60vh";
-e.style.fontSize="22px";
 document.body.appendChild(e);
 setTimeout(()=>e.remove(),2000);
 }
 }
-
-/* START BACKGROUND HEARTS */
-setInterval(spawnHeart,300);
 
 /* SLIDESHOW */
 let slides=[
@@ -289,19 +257,13 @@ if(i>=slides.length){
 next("voice");
 return;
 }
-
 document.getElementById("slide").src=slides[i].img;
 document.getElementById("cap").innerText=slides[i].cap;
 }
 
-/* MUSIC */
-function playMusic(){
-document.getElementById("song").play();
-}
-
-/* FINAL YES */
+/* FINAL */
 function finalYes(){
-spawnHeartBurst();
+spawnBurst();
 setTimeout(()=>next("final"),1000);
 }
 
