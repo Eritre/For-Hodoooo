@@ -17,11 +17,10 @@ color:#333;
 .screen { display:none; margin-top:70px; }
 .active { display:block; }
 
-h1 { font-size:35px; }
-p { font-size:18px; }
+h1 { font-size:32px; }
 
 button {
-padding:15px 25px;
+padding:14px 22px;
 font-size:18px;
 border:none;
 border-radius:20px;
@@ -31,8 +30,6 @@ background:#ff4d6d;
 color:white;
 }
 
-button:hover { transform:scale(1.05); }
-
 input {
 padding:12px;
 border-radius:10px;
@@ -41,30 +38,19 @@ font-size:16px;
 }
 
 img, video {
-width:260px;
+width:250px;
 border-radius:20px;
 margin-top:10px;
 }
 
-.heart {
-position:absolute;
-animation:float 5s linear infinite;
-}
-
-@keyframes float {
-from {transform:translateY(100vh);}
-to {transform:translateY(-10vh);}
-}
-
 .caption {
 font-size:18px;
-margin-top:10px;
 color:#555;
 }
 
 .love-text {
 font-size:22px;
-margin:8px 0;
+margin:6px;
 }
 </style>
 </head>
@@ -73,10 +59,10 @@ margin:8px 0;
 
 <!-- LOGIN -->
 <div id="login" class="screen active">
-<h1>Only you can unlock this 😏</h1>
+<h1>Only you can unlock this ❤️</h1>
 <p>What's my favorite nickname for you?</p>
-<input type="text" id="pass">
-<br><br>
+<input id="pass">
+<br>
 <button onclick="checkPass()">Enter ❤️</button>
 </div>
 
@@ -92,27 +78,22 @@ margin:8px 0;
 <p id="loadingText"></p>
 </div>
 
-<!-- QUIZ -->
-<div id="quiz" class="screen">
-<h1>Be honest 😏</h1>
-<p id="question"></p>
-<button onclick="nextQ()">Yes 💖</button>
-<button onclick="nextQ()">Of course 😌</button>
-</div>
-
-<!-- FINAL QUESTION -->
-<div id="finalQ" class="screen">
-<h1>DO YOU LOVE ME?</h1>
-<button onclick="love()">A LOT 💖</button>
-<button onclick="love()">SUPER A LOT 😍</button>
-</div>
-
 <!-- GALLERY -->
 <div id="gallery" class="screen">
-<h1>Our little memories ❤️</h1>
-<div id="mediaContainer"></div>
-<p id="caption" class="caption"></p>
-<button onclick="nextPhoto()">Next ➜</button>
+<h1>Our Memories ❤️</h1>
+<div id="media"></div>
+<p id="caption"></p>
+<button onclick="nextMedia()">Next ➜</button>
+</div>
+
+<!-- VOICE -->
+<div id="voice" class="screen">
+<h1>Voice Messages 🎧</h1>
+<audio controls src="voice1.mp3"></audio>
+<br>
+<audio controls src="voice2.mp3"></audio>
+<br><br>
+<button onclick="final()">Continue ❤️</button>
 </div>
 
 <!-- FINAL -->
@@ -128,24 +109,23 @@ margin:8px 0;
 <br>
 
 <img src="somaliland.png" width="80">
+<img src="eritrea.png" width="80">
 
-<p style="font-size:22px;">
-THIS IS A FOREVER THING.<br>
-I AM GLAD YOU ARE ON BOARD ❤️
+<p style="font-size:20px;">
+THIS IS A FOREVER THING ❤️
 </p>
 </div>
 
-<!-- 🎵 MUSIC -->
+<!-- MUSIC -->
 <audio id="music" src="music.mp3" loop></audio>
 
 <script>
 
-/* 🔊 MUSIC START (works after first click) */
-document.addEventListener("click", function(){
+/* MUSIC START */
+document.addEventListener("click", ()=>{
 document.getElementById("music").play();
 }, { once:true });
 
-/* SCREEN SWITCH */
 function show(id){
 document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
@@ -153,150 +133,116 @@ document.getElementById(id).classList.add("active");
 
 /* PASSWORD */
 function checkPass(){
-let val = document.getElementById("pass").value.toLowerCase().trim();
-if(val === "farooha"){
+let val=document.getElementById("pass").value.toLowerCase().trim();
+if(val==="farooha"){
 startStory();
-} else {
-alert("Try again 😒");
 }
 }
 
-/* TYPE TEXT */
-function typeText(el, text, speed, cb){
-let i=0;
-el.textContent="";
-let inter=setInterval(()=>{
-el.textContent+=text.charAt(i);
-i++;
-if(i>=text.length){
-clearInterval(inter);
-if(cb) setTimeout(cb,800);
-}
-},speed);
-}
-
-/* STORY */
+/* STORY FLOW */
 function startStory(){
 show("story");
 
 let name=document.getElementById("name");
 let text=document.getElementById("storyText");
 
-typeText(name,"Farooha ❤️",80,()=>{
-text.textContent="I made this for you… just follow it 😌";
-
+type("Farax Mohammed Handule ❤️",name,()=>{
+type("Farooha ❤️",name,()=>{
+type("I'm thinking about you…",text,()=>{
+type("It has been the best 1 year and 2 months ❤️",text,()=>{
+type("She makes life soft, beautiful and peaceful 💖",text,()=>{
 setTimeout(()=>{
 show("loading");
-fakeLoading();
-},2000);
+loading();
+},1500);
+});
+});
+});
+});
 });
 }
 
+/* TYPE */
+function type(t,el,cb){
+let i=0;
+el.textContent="";
+let x=setInterval(()=>{
+el.textContent+=t[i];
+i++;
+if(i>=t.length){
+clearInterval(x);
+if(cb) cb();
+}
+},50);
+}
+
 /* LOADING */
-function fakeLoading(){
+function loading(){
 let el=document.getElementById("loadingText");
 
-let data=[
-{text:"Thinking about you...", time:2000},
-{text:"It has been an amazing 1 year and 2 months... You make life soft, peaceful and worth living 💚", time:10000},
-{text:"Almost ready...", time:2000}
+let msgs=[
+{t:"Thinking about you...", d:2000},
+{t:"1 year and 2 months with you feels like home 💖", d:10000},
+{t:"Almost ready...", d:2000}
 ];
 
 let i=0;
 
 function next(){
-if(i<data.length){
-el.textContent=data[i].text;
-setTimeout(()=>{ i++; next(); }, data[i].time);
+if(i<msgs.length){
+el.textContent=msgs[i].t;
+setTimeout(()=>{i++; next();}, msgs[i].d);
 } else {
-show("quiz");
-askQ();
+show("gallery");
 }
 }
-
 next();
-}
-
-/* QUIZ */
-let questions=[
-"Do you miss me?",
-"Am I your favorite person?",
-"Do you smile when you see my name?"
-];
-
-let q=0;
-
-function askQ(){
-document.getElementById("question").textContent=questions[q];
-}
-
-function nextQ(){
-q++;
-if(q<questions.length){
-askQ();
-}else{
-show("finalQ");
-}
-}
-
-/* LOVE */
-function love(){
-for(let i=0;i<50;i++){
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="💖";
-h.style.left=Math.random()*100+"vw";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),5000);
-}
-
-setTimeout(()=>showGallery(),1200);
 }
 
 /* GALLERY */
 let media=[
-{type:"image", src:"photo1.jpeg", caption:"YOU & ME ❤️"},
-{type:"image", src:"photo2.jpeg", caption:"Your smile 😍"},
-{type:"image", src:"photo3.jpeg", caption:"Perfect ✨"},
-{type:"video", src:"video1.mp4", caption:"Memories 💚"},
-{type:"video", src:"video2.mp4", caption:"More moments 🎵"}
+{type:"img", src:"photo1.jpeg", cap:"YOU ❤️"},
+{type:"img", src:"photo2.jpeg", cap:"US 💖"},
+{type:"img", src:"photo3.jpeg", cap:"PERFECT ✨"},
+{type:"vid", src:"video1.mp4", cap:"MEMORY 🎥"},
+{type:"vid", src:"video2.mp4", cap:"LOVE 🎵"}
 ];
 
-let index=0;
+let i=0;
 
-function showGallery(){
-show("gallery");
-index=0;
-updatePhoto();
-}
+function nextMedia(){
+let m=document.getElementById("media");
+let c=document.getElementById("caption");
 
-function updatePhoto(){
-let c=document.getElementById("mediaContainer");
-c.innerHTML="";
+m.innerHTML="";
 
-let cur=media[index];
+let x=media[i];
 
-if(cur.type==="image"){
+if(x.type==="img"){
 let img=document.createElement("img");
-img.src=cur.src;
-c.appendChild(img);
+img.src=x.src;
+m.appendChild(img);
 }else{
-let vid=document.createElement("video");
-vid.src=cur.src;
-vid.controls=true;
-c.appendChild(vid);
+let v=document.createElement("video");
+v.src=x.src;
+v.controls=true;
+m.appendChild(v);
 }
 
-document.getElementById("caption").textContent=cur.caption;
+c.textContent=x.cap;
+
+i++;
+
+if(i>=media.length){
+setTimeout(()=>{
+show("voice");
+},2000);
+}
 }
 
-function nextPhoto(){
-index++;
-if(index<media.length){
-updatePhoto();
-}else{
+/* FINAL */
+function final(){
 show("final");
-}
 }
 
 </script>
