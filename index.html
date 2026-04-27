@@ -5,21 +5,21 @@
 <title>For Farooha ❤️</title>
 
 <style>
-body {
+body{
 margin:0;
 font-family:'Comic Sans MS', cursive;
 text-align:center;
-background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ffe4e1);
+background:linear-gradient(135deg,#ffb6c1,#ffc0cb,#ffe4e1);
 overflow:hidden;
 color:#333;
 }
 
-.screen { display:none; margin-top:70px; }
-.active { display:block; }
+.screen{display:none;margin-top:70px;}
+.active{display:block;}
 
-h1 { font-size:32px; }
+h1{font-size:32px;}
 
-button {
+button{
 padding:14px 22px;
 font-size:18px;
 border:none;
@@ -30,28 +30,22 @@ background:#ff4d6d;
 color:white;
 }
 
-input {
+input{
 padding:12px;
 border-radius:10px;
 border:none;
 font-size:16px;
 }
 
-img, video {
+img,video{
 width:250px;
 border-radius:20px;
 margin-top:10px;
 }
 
-.caption {
-font-size:18px;
-color:#555;
-}
+.caption{color:#555;font-size:18px;}
 
-.love-text {
-font-size:22px;
-margin:6px;
-}
+.love-text{font-size:22px;margin:6px;}
 </style>
 </head>
 
@@ -89,11 +83,9 @@ margin:6px;
 <!-- VOICE -->
 <div id="voice" class="screen">
 <h1>Voice Messages 🎧</h1>
-<audio controls src="voice1.mp3"></audio>
-<br>
-<audio controls src="voice2.mp3"></audio>
-<br><br>
-<button onclick="final()">Continue ❤️</button>
+<audio controls src="voice1.mp3"></audio><br>
+<audio controls src="voice2.mp3"></audio><br><br>
+<button onclick="finalScreen()">Continue ❤️</button>
 </div>
 
 <!-- FINAL -->
@@ -121,10 +113,10 @@ THIS IS A FOREVER THING ❤️
 
 <script>
 
-/* MUSIC START */
-document.addEventListener("click", ()=>{
+/* MUSIC (starts after click) */
+document.addEventListener("click",()=>{
 document.getElementById("music").play();
-}, { once:true });
+},{once:true});
 
 function show(id){
 document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
@@ -133,24 +125,26 @@ document.getElementById(id).classList.add("active");
 
 /* PASSWORD */
 function checkPass(){
-let val=document.getElementById("pass").value.toLowerCase().trim();
-if(val==="farooha"){
+let v=document.getElementById("pass").value.toLowerCase().trim();
+if(v==="farooha"){
 startStory();
+}else{
+alert("Try again 😒");
 }
 }
 
-/* STORY FLOW */
+/* STORY */
 function startStory(){
 show("story");
 
-let name=document.getElementById("name");
-let text=document.getElementById("storyText");
+let n=document.getElementById("name");
+let t=document.getElementById("storyText");
 
-type("Farax Mohammed Handule ❤️",name,()=>{
-type("Farooha ❤️",name,()=>{
-type("I'm thinking about you…",text,()=>{
-type("It has been the best 1 year and 2 months ❤️",text,()=>{
-type("She makes life soft, beautiful and peaceful 💖",text,()=>{
+type("Farax Mohammed Handule ❤️",n,()=>{
+type("Farooha ❤️",n,()=>{
+type("I'm thinking about you…",t,()=>{
+type("It has been the best 1 year and 2 months ❤️",t,()=>{
+type("You make life soft, beautiful and peaceful 💖",t,()=>{
 setTimeout(()=>{
 show("loading");
 loading();
@@ -163,13 +157,13 @@ loading();
 }
 
 /* TYPE */
-function type(t,el,cb){
+function type(txt,el,cb){
 let i=0;
 el.textContent="";
 let x=setInterval(()=>{
-el.textContent+=t[i];
+el.textContent+=txt[i];
 i++;
-if(i>=t.length){
+if(i>=txt.length){
 clearInterval(x);
 if(cb) cb();
 }
@@ -180,19 +174,18 @@ if(cb) cb();
 function loading(){
 let el=document.getElementById("loadingText");
 
-let msgs=[
-{t:"Thinking about you...", d:2000},
-{t:"1 year and 2 months with you feels like home 💖", d:10000},
-{t:"Almost ready...", d:2000}
+let m=[
+{t:"Thinking about you...",d:2000},
+{t:"1 year and 2 months feels like home 💖",d:10000},
+{t:"Almost ready...",d:2000}
 ];
 
 let i=0;
-
 function next(){
-if(i<msgs.length){
-el.textContent=msgs[i].t;
-setTimeout(()=>{i++; next();}, msgs[i].d);
-} else {
+if(i<m.length){
+el.textContent=m[i].t;
+setTimeout(()=>{i++;next();},m[i].d);
+}else{
 show("gallery");
 }
 }
@@ -201,11 +194,11 @@ next();
 
 /* GALLERY */
 let media=[
-{type:"img", src:"photo1.jpeg", cap:"YOU ❤️"},
-{type:"img", src:"photo2.jpeg", cap:"US 💖"},
-{type:"img", src:"photo3.jpeg", cap:"PERFECT ✨"},
-{type:"vid", src:"video1.mp4", cap:"MEMORY 🎥"},
-{type:"vid", src:"video2.mp4", cap:"LOVE 🎵"}
+{type:"img",src:"photo1.jpeg",cap:"YOU ❤️"},
+{type:"img",src:"photo2.jpeg",cap:"US 💖"},
+{type:"img",src:"photo3.jpeg",cap:"PERFECT ✨"},
+{type:"vid",src:"video1.mp4",cap:"MEMORY 🎥"},
+{type:"vid",src:"video2.mp4",cap:"LOVE 🎵"}
 ];
 
 let i=0;
@@ -213,7 +206,6 @@ let i=0;
 function nextMedia(){
 let m=document.getElementById("media");
 let c=document.getElementById("caption");
-
 m.innerHTML="";
 
 let x=media[i];
@@ -234,14 +226,12 @@ c.textContent=x.cap;
 i++;
 
 if(i>=media.length){
-setTimeout(()=>{
-show("voice");
-},2000);
+setTimeout(()=>show("voice"),2000);
 }
 }
 
-/* FINAL */
-function final(){
+/* FINAL SCREEN */
+function finalScreen(){
 show("final");
 }
 
