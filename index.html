@@ -18,7 +18,6 @@ color:#333;
 .active { display:block; }
 
 h1 { font-size:35px; }
-
 p { font-size:18px; }
 
 button {
@@ -32,9 +31,7 @@ background:#ff4d6d;
 color:white;
 }
 
-button:hover {
-transform:scale(1.05);
-}
+button:hover { transform:scale(1.05); }
 
 input {
 padding:12px;
@@ -43,19 +40,12 @@ border:none;
 font-size:16px;
 }
 
-img {
+img, video {
 width:260px;
 border-radius:20px;
 margin-top:10px;
 }
 
-video {
-width:260px;
-border-radius:20px;
-margin-top:10px;
-}
-
-/* fade animation */
 .fade {
 animation: fadeIn 2s ease-in-out;
 }
@@ -65,7 +55,6 @@ from {opacity:0;}
 to {opacity:1;}
 }
 
-/* hearts */
 .heart {
 position:absolute;
 animation:float 5s linear infinite;
@@ -76,7 +65,6 @@ from {transform:translateY(100vh);}
 to {transform:translateY(-10vh);}
 }
 
-/* caption */
 .caption {
 font-size:18px;
 margin-top:10px;
@@ -96,7 +84,7 @@ color:#555;
 <button onclick="checkPass()">Enter ❤️</button>
 </div>
 
-<!-- STORY NAME -->
+<!-- STORY -->
 <div id="story" class="screen">
 <h1 id="name"></h1>
 <p id="storyText"></p>
@@ -133,13 +121,6 @@ color:#555;
 <button onclick="nextPhoto()">Next ➜</button>
 </div>
 
-<!-- VOICE GATE -->
-<div id="voiceGate" class="screen">
-<h1>Before you continue… 🎤</h1>
-<p>Listen to this first ❤️</p>
-<button onclick="playVoiceAndContinue()">▶️ Play</button>
-</div>
-
 <!-- FINAL MESSAGE -->
 <div id="final" class="screen">
 <h1>💌</h1>
@@ -148,11 +129,6 @@ THIS IS A FOREVER THING.<br>
 I AM GLAD YOU ARE ON BOARD ❤️
 </p>
 </div>
-
-<!-- MUSIC -->
-<iframe width="0" height="0"
-src="https://www.youtube.com/embed/Pma_IwydPmw?autoplay=1&loop=1"
-frameborder="0"></iframe>
 
 <script>
 
@@ -172,7 +148,7 @@ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
-/* TYPE NAME */
+/* TYPE TEXT */
 function typeText(el, text, speed, cb){
 let i=0;
 el.innerHTML="";
@@ -269,6 +245,7 @@ let media=[
 {type:"video", src:"hodoo audio.mp4", caption:"Listening to your voice 💚"},
 {type:"video", src:"no 2.mp4", caption:"More memories with you 🎵"}
 ];
+
 let index=0;
 
 function showGallery(){
@@ -287,7 +264,7 @@ if(current.type==="image"){
 let img=document.createElement("img");
 img.src=current.src;
 container.appendChild(img);
-} else if(current.type==="video"){
+} else {
 let video=document.createElement("video");
 video.src=current.src;
 video.controls=true;
@@ -302,15 +279,8 @@ index++;
 if(index<media.length){
 updatePhoto();
 } else {
-show("voiceGate");
-}
-}
-
-
-
-audio.onended=function(){
 show("final");
-};
+}
 }
 
 </script>
