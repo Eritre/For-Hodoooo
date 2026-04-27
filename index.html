@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do You Love Me? 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #e74c3c;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .heart {
+            font-size: 3em;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.2);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .images-container {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .image-placeholder {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .question {
+            font-size: 1.8em;
+            color: #333;
+            margin: 30px 0;
+            font-weight: bold;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-lot {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-lot:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-super {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+
+        .btn-super:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(250, 112, 154, 0.4);
+        }
+
+        .response {
+            margin-top: 30px;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #e74c3c;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .response.show {
+            opacity: 1;
+        }
+
+        .music-note {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+
+        audio {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart">💕</div>
+        <h1>Do You Love Me?</h1>
+        
+        <div class="images-container">
+            <div class="image-placeholder">📸</div>
+            <div class="image-placeholder">💑</div>
+            <div class="image-placeholder">💖</div>
+        </div>
+
+        <div class="question">How much do you love me?</div>
+
+        <div class="buttons-container">
+            <button class="btn-lot" onclick="answer('A LOT')">A LOT ❤️</button>
+            <button class="btn-super" onclick="answer('SUPER A LOT')">SUPER A LOT 💖</button>
+        </div>
+
+        <div class="response" id="response"></div>
+
+        <div class="music-note">🎵</div>
+        <audio id="music" controls>
+            <source src="https://www.youtube.com/watch?v=qJ0FjhcDFkk" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        // Auto-play music when page loads
+        window.addEventListener('load', function() {
+            const audio = document.getElementById('music');
+            audio.play().catch(err => {
+                console.log('Auto-play prevented by browser');
+            });
+        });
+
+        function answer(choice) {
+            const responseDiv = document.getElementById('response');
+            
+            if (choice === 'A LOT') {
+                responseDiv.textContent = '🥰 That\'s amazing! I love you a lot too!';
+            } else {
+                responseDiv.textContent = '😍 SUPER amazing! You\'re the best!';
+            }
+            
+            responseDiv.classList.add('show');
+            
+            // Add celebration effect
+            createConfetti();
+        }
+
+        function createConfetti() {
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-10px';
+                confetti.style.fontSize = '2em';
+                confetti.style.pointerEvents = 'none';
+                confetti.textContent = ['💕', '💖', '💗', '✨', '⭐'][Math.floor(Math.random() * 5)];
+                document.body.appendChild(confetti);
+
+                let top = -10;
+                const interval = setInterval(() => {
+                    top += Math.random() * 5 + 2;
+                    confetti.style.top = top + 'px';
+                    confetti.style.opacity = 1 - (top / window.innerHeight);
+
+                    if (top > window.innerHeight) {
+                        clearInterval(interval);
+                        confetti.remove();
+                    }
+                }, 20);
+            }
+        }
+    </script>
+</body>
+</html>
