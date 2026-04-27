@@ -61,6 +61,11 @@ font-size:18px;
 margin-top:10px;
 color:#555;
 }
+
+.love-text {
+font-size:22px;
+margin:8px 0;
+}
 </style>
 </head>
 
@@ -70,7 +75,7 @@ color:#555;
 <div id="login" class="screen active">
 <h1>Only you can unlock this 😏</h1>
 <p>What's my favorite nickname for you?</p>
-<input type="text" id="pass" placeholder="type it here 👀">
+<input type="text" id="pass">
 <br><br>
 <button onclick="checkPass()">Enter ❤️</button>
 </div>
@@ -112,14 +117,33 @@ color:#555;
 
 <!-- FINAL -->
 <div id="final" class="screen">
-<h1>💌</h1>
+<h1>❤️</h1>
+
+<div class="love-text">I LOVE YOU 🇬🇧</div>
+<div class="love-text">أحبك 🇸🇦</div>
+<div class="love-text">ኣፍቅረኪ 🇪🇷</div>
+<div class="love-text">Te amo 🇪🇸</div>
+<div class="love-text">Waan ku jeclahay 🇸🇴</div>
+
+<br>
+
+<img src="somaliland.png" width="80">
+
 <p style="font-size:22px;">
 THIS IS A FOREVER THING.<br>
 I AM GLAD YOU ARE ON BOARD ❤️
 </p>
 </div>
 
+<!-- 🎵 MUSIC -->
+<audio id="music" src="music.mp3" loop></audio>
+
 <script>
+
+/* 🔊 MUSIC START (works after first click) */
+document.addEventListener("click", function(){
+document.getElementById("music").play();
+}, { once:true });
 
 /* SCREEN SWITCH */
 function show(id){
@@ -137,78 +161,80 @@ alert("Try again 😒");
 }
 }
 
-/* TYPE TEXT (SAFE) */
+/* TYPE TEXT */
 function typeText(el, text, speed, cb){
-let i = 0;
-el.textContent = "";
-
-let inter = setInterval(()=>{
-el.textContent += text.charAt(i);
+let i=0;
+el.textContent="";
+let inter=setInterval(()=>{
+el.textContent+=text.charAt(i);
 i++;
-
-if(i >= text.length){
+if(i>=text.length){
 clearInterval(inter);
-if(cb) setTimeout(cb, 800);
+if(cb) setTimeout(cb,800);
 }
-}, speed);
+},speed);
 }
 
 /* STORY */
 function startStory(){
 show("story");
 
-let name = document.getElementById("name");
-let text = document.getElementById("storyText");
+let name=document.getElementById("name");
+let text=document.getElementById("storyText");
 
-typeText(name, "Farooha ❤️", 80, ()=>{
-text.textContent = "I made this for you… just follow it 😌";
+typeText(name,"Farooha ❤️",80,()=>{
+text.textContent="I made this for you… just follow it 😌";
 
 setTimeout(()=>{
 show("loading");
 fakeLoading();
-}, 2000);
+},2000);
 });
 }
 
 /* LOADING */
-let msgs = [
-"Thinking about you...",
-"It has been an amazing time with you 💚",
-"Almost ready..."
+function fakeLoading(){
+let el=document.getElementById("loadingText");
+
+let data=[
+{text:"Thinking about you...", time:2000},
+{text:"It has been an amazing 1 year and 2 months... You make life soft, peaceful and worth living 💚", time:10000},
+{text:"Almost ready...", time:2000}
 ];
 
-function fakeLoading(){
-let i = 0;
-let inter = setInterval(()=>{
-document.getElementById("loadingText").textContent = msgs[i];
-i++;
+let i=0;
 
-if(i >= msgs.length){
-clearInterval(inter);
+function next(){
+if(i<data.length){
+el.textContent=data[i].text;
+setTimeout(()=>{ i++; next(); }, data[i].time);
+} else {
 show("quiz");
 askQ();
 }
-}, 1500);
+}
+
+next();
 }
 
 /* QUIZ */
-let questions = [
+let questions=[
 "Do you miss me?",
 "Am I your favorite person?",
 "Do you smile when you see my name?"
 ];
 
-let q = 0;
+let q=0;
 
 function askQ(){
-document.getElementById("question").textContent = questions[q];
+document.getElementById("question").textContent=questions[q];
 }
 
 function nextQ(){
 q++;
-if(q < questions.length){
+if(q<questions.length){
 askQ();
-} else {
+}else{
 show("finalQ");
 }
 }
@@ -228,7 +254,7 @@ setTimeout(()=>showGallery(),1200);
 }
 
 /* GALLERY */
-let media = [
+let media=[
 {type:"image", src:"photo1.jpeg", caption:"YOU & ME ❤️"},
 {type:"image", src:"photo2.jpeg", caption:"Your smile 😍"},
 {type:"image", src:"photo3.jpeg", caption:"Perfect ✨"},
@@ -236,39 +262,39 @@ let media = [
 {type:"video", src:"video2.mp4", caption:"More moments 🎵"}
 ];
 
-let index = 0;
+let index=0;
 
 function showGallery(){
 show("gallery");
-index = 0;
+index=0;
 updatePhoto();
 }
 
 function updatePhoto(){
-let container = document.getElementById("mediaContainer");
-container.innerHTML = "";
+let c=document.getElementById("mediaContainer");
+c.innerHTML="";
 
-let current = media[index];
+let cur=media[index];
 
-if(current.type === "image"){
-let img = document.createElement("img");
-img.src = current.src;
-container.appendChild(img);
-} else {
-let video = document.createElement("video");
-video.src = current.src;
-video.controls = true;
-container.appendChild(video);
+if(cur.type==="image"){
+let img=document.createElement("img");
+img.src=cur.src;
+c.appendChild(img);
+}else{
+let vid=document.createElement("video");
+vid.src=cur.src;
+vid.controls=true;
+c.appendChild(vid);
 }
 
-document.getElementById("caption").textContent = current.caption;
+document.getElementById("caption").textContent=cur.caption;
 }
 
 function nextPhoto(){
 index++;
-if(index < media.length){
+if(index<media.length){
 updatePhoto();
-} else {
+}else{
 show("final");
 }
 }
