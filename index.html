@@ -145,17 +145,18 @@ FARAX MOHAMMED ABDULRAHMAN HANDULE DUALE<br>
 <button onclick="nextSlide()">Next 💖</button>
 </div>
 
-<!-- 🎵 MUSIC (FIXED MP3 VERSION) -->
+<!-- 🎵 MUSIC (FIXED ONLY HERE) -->
 <div id="music" class="screen">
 <h1>Our Song 🎵</h1>
 
-<p>Playing our memory ❤️</p>
+<p>Press play to feel it ❤️</p>
 
-<audio id="song" controls>
+<audio id="song" preload="auto">
 <source src="music.mp3" type="audio/mpeg">
 Your browser does not support audio.
 </audio>
 
+<button onclick="playSong()">▶ Play Song</button>
 <button onclick="next('proposal')">Next 💖</button>
 </div>
 
@@ -208,12 +209,6 @@ I CAN’T WAIT TO SEE YOU IN JULY ❤️
 function next(id){
 show(id);
 spawnHeart();
-
-/* 🎵 AUTO PLAY MUSIC WHEN MUSIC PAGE OPENS */
-if(id === "music"){
-let song = document.getElementById("song");
-song.play().catch(()=>{});
-}
 }
 
 function show(id){
@@ -291,6 +286,16 @@ return;
 }
 document.getElementById("slide").src=slides[i].img;
 document.getElementById("cap").innerText=slides[i].cap;
+}
+
+/* 🎵 MUSIC FIX */
+function playSong(){
+let song = document.getElementById("song");
+
+song.play().catch(err=>{
+console.log("Playback blocked:", err);
+alert("Tap again to start the song ❤️");
+});
 }
 
 /* FINAL */
