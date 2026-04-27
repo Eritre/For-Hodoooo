@@ -1,241 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do You Love Me? 💕</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<title>For Farooha ❤️</title>
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+<style>
+body {
+margin:0;
+font-family:'Comic Sans MS', cursive;
+text-align:center;
+background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ffe4e1);
+overflow:hidden;
+color:#333;
+}
 
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            animation: fadeIn 0.8s ease-in;
-        }
+.screen { display:none; margin-top:70px; }
+.active { display:block; }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+h1 { font-size:35px; }
 
-        h1 {
-            color: #e74c3c;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
+p { font-size:18px; }
 
-        .heart {
-            font-size: 3em;
-            animation: heartbeat 1.5s infinite;
-            display: inline-block;
-        }
+button {
+padding:15px 25px;
+font-size:18px;
+border:none;
+border-radius:20px;
+margin:10px;
+cursor:pointer;
+background:#ff4d6d;
+color:white;
+}
 
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            25% {
-                transform: scale(1.2);
-            }
-            50% {
-                transform: scale(1);
-            }
-        }
+button:hover {
+transform:scale(1.05);
+}
 
-        .images-container {
-            margin: 30px 0;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+input {
+padding:12px;
+border-radius:10px;
+border:none;
+font-size:16px;
+}
 
-        .image-placeholder {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2em;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
+img {
+width:260px;
+border-radius:20px;
+margin-top:10px;
+}
 
-        .question {
-            font-size: 1.8em;
-            color: #333;
-            margin: 30px 0;
-            font-weight: bold;
-        }
+/* fade animation */
+.fade {
+animation: fadeIn 2s ease-in-out;
+}
 
-        .buttons-container {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 30px 0;
-        }
+@keyframes fadeIn {
+from {opacity:0;}
+to {opacity:1;}
+}
 
-        button {
-            padding: 15px 30px;
-            font-size: 1.1em;
-            font-weight: bold;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
+/* hearts */
+.heart {
+position:absolute;
+animation:float 5s linear infinite;
+}
 
-        .btn-lot {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
+@keyframes float {
+from {transform:translateY(100vh);}
+to {transform:translateY(-10vh);}
+}
 
-        .btn-lot:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
-        }
-
-        .btn-super {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            color: white;
-        }
-
-        .btn-super:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(250, 112, 154, 0.4);
-        }
-
-        .response {
-            margin-top: 30px;
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #e74c3c;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .response.show {
-            opacity: 1;
-        }
-
-        .music-note {
-            display: inline-block;
-            margin-top: 20px;
-            font-size: 1.5em;
-        }
-
-        audio {
-            margin-top: 20px;
-            width: 100%;
-            max-width: 300px;
-        }
-    </style>
+/* caption */
+.caption {
+font-size:18px;
+margin-top:10px;
+color:#555;
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="heart">💕</div>
-        <h1>Do You Love Me?</h1>
-        
-        <div class="images-container">
-            <div class="image-placeholder">📸</div>
-            <div class="image-placeholder">💑</div>
-            <div class="image-placeholder">💖</div>
-        </div>
 
-        <div class="question">How much do you love me?</div>
+<!-- PASSWORD -->
+<div id="login" class="screen active">
+<h1>Only you can unlock this 😏</h1>
+<p>What’s my favorite nickname for you?</p>
+<input type="text" id="pass" placeholder="type it here 👀">
+<br><br>
+<button onclick="checkPass()">Enter ❤️</button>
+</div>
 
-        <div class="buttons-container">
-            <button class="btn-lot" onclick="answer('A LOT')">A LOT ❤️</button>
-            <button class="btn-super" onclick="answer('SUPER A LOT')">SUPER A LOT 💖</button>
-        </div>
+<!-- STORY NAME -->
+<div id="story" class="screen">
+<h1 id="name"></h1>
+<p id="storyText"></p>
+</div>
 
-        <div class="response" id="response"></div>
+<!-- LOADING -->
+<div id="loading" class="screen">
+<h1>Thinking about you… 😌</h1>
+<p id="loadingText"></p>
+</div>
 
-        <div class="music-note">🎵</div>
-        <audio id="music" controls>
-            <source src="https://www.youtube.com/watch?v=qJ0FjhcDFkk" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-    </div>
+<!-- QUIZ -->
+<div id="quiz" class="screen">
+<h1>Be honest 😏</h1>
+<p id="question"></p>
+<button onclick="nextQ()">Yes 💖</button>
+<button onclick="nextQ()">Of course 😌</button>
+</div>
 
-    <script>
-        // Auto-play music when page loads
-        window.addEventListener('load', function() {
-            const audio = document.getElementById('music');
-            audio.play().catch(err => {
-                console.log('Auto-play prevented by browser');
-            });
-        });
+<!-- FINAL QUESTION -->
+<div id="finalQ" class="screen">
+<h1>DO YOU LOVE ME?</h1>
+<button onclick="love()">A LOT 💖</button>
+<button onclick="love()">SUPER A LOT 😍</button>
+</div>
 
-        function answer(choice) {
-            const responseDiv = document.getElementById('response');
-            
-            if (choice === 'A LOT') {
-                responseDiv.textContent = '🥰 That\'s amazing! I love you a lot too!';
-            } else {
-                responseDiv.textContent = '😍 SUPER amazing! You\'re the best!';
-            }
-            
-            responseDiv.classList.add('show');
-            
-            // Add celebration effect
-            createConfetti();
-        }
+<!-- SLIDESHOW -->
+<div id="gallery" class="screen">
+<h1>Our little memories ❤️</h1>
 
-        function createConfetti() {
-            const container = document.querySelector('.container');
-            for (let i = 0; i < 20; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.left = Math.random() * window.innerWidth + 'px';
-                confetti.style.top = '-10px';
-                confetti.style.fontSize = '2em';
-                confetti.style.pointerEvents = 'none';
-                confetti.textContent = ['💕', '💖', '💗', '✨', '⭐'][Math.floor(Math.random() * 5)];
-                document.body.appendChild(confetti);
+<img id="photo" src="photo1.jpg">
+<p id="caption" class="caption"></p>
 
-                let top = -10;
-                const interval = setInterval(() => {
-                    top += Math.random() * 5 + 2;
-                    confetti.style.top = top + 'px';
-                    confetti.style.opacity = 1 - (top / window.innerHeight);
+<button onclick="nextPhoto()">Next ➜</button>
+</div>
 
-                    if (top > window.innerHeight) {
-                        clearInterval(interval);
-                        confetti.remove();
-                    }
-                }, 20);
-            }
-        }
-    </script>
+<!-- VOICE GATE -->
+<div id="voiceGate" class="screen">
+<h1>Before you continue… 🎤</h1>
+<p>Listen to this first ❤️</p>
+<button onclick="playVoiceAndContinue()">▶️ Play</button>
+</div>
+
+<!-- FINAL MESSAGE -->
+<div id="final" class="screen">
+<h1>💌</h1>
+<p style="font-size:22px;">
+THIS IS A FOREVER THING.<br>
+I AM GLAD YOU ARE ON BOARD ❤️
+</p>
+</div>
+
+<!-- MUSIC -->
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&loop=1&playlist=YOUR_VIDEO_ID"
+frameborder="0"></iframe>
+
+<script>
+
+/* PASSWORD */
+function checkPass(){
+let val=document.getElementById("pass").value.toLowerCase().trim();
+if(val==="farooha"){
+startStory();
+} else {
+alert("Try again 😒");
+}
+}
+
+/* SCREEN SWITCH */
+function show(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+/* TYPE NAME */
+function typeText(el, text, speed, cb){
+let i=0;
+el.innerHTML="";
+let inter=setInterval(()=>{
+el.innerHTML+=text.charAt(i);
+i++;
+if(i>=text.length){
+clearInterval(inter);
+if(cb) setTimeout(cb,800);
+}
+},speed);
+}
+
+/* STORY */
+function startStory(){
+show("story");
+
+let name=document.getElementById("name");
+let text=document.getElementById("storyText");
+
+typeText(name,"Farax Mohammed Abdulrahman Hadule...",50,()=>{
+typeText(name,"Gerxaches...",60,()=>{
+typeText(name,"Farooha ❤️",80,()=>{
+text.innerHTML="I made this for you… just follow it 😌";
+
+setTimeout(()=>{
+show("loading");
+fakeLoading();
+},2000);
+});
+});
+});
+}
+
+/* LOADING */
+let msgs=[
+"Thinking about you...",
+"You make everything softer...",
+"Almost ready..."
+];
+
+function fakeLoading(){
+let i=0;
+let inter=setInterval(()=>{
+document.getElementById("loadingText").innerText=msgs[i];
+i++;
+if(i>=msgs.length){
+clearInterval(inter);
+show("quiz");
+askQ();
+}
+},1500);
+}
+
+/* QUESTIONS */
+let questions=[
+"Do you miss me?",
+"Am I your favorite person?",
+"Do you smile when you see my name?"
+];
+
+let q=0;
+
+function askQ(){
+document.getElementById("question").innerText=questions[q];
+}
+
+function nextQ(){
+q++;
+if(q<questions.length){
+askQ();
+} else {
+show("finalQ");
+}
+}
+
+/* LOVE */
+function love(){
+for(let i=0;i<70;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+}
+
+setTimeout(()=>showGallery(),1200);
+}
+
+/* SLIDESHOW */
+let photos=["photo1.jpg","your-photo.jpg","photo2.jpg"];
+let captions=["YOU & ME ❤️","Prettiest eyes in Somaliland 😍","ETHEREAL ✨"];
+let index=0;
+
+function showGallery(){
+show("gallery");
+index=0;
+updatePhoto();
+}
+
+function updatePhoto(){
+document.getElementById("photo").src=photos[index];
+document.getElementById("caption").innerText=captions[index];
+}
+
+function nextPhoto(){
+index++;
+if(index<photos.length){
+updatePhoto();
+} else {
+show("voiceGate");
+}
+}
+
+/* VOICE */
+function playVoiceAndContinue(){
+let audio=new Audio("voice1.mp3");
+audio.play();
+
+audio.onended=function(){
+show("final");
+};
+}
+
+</script>
+
 </body>
 </html>
