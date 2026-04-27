@@ -49,6 +49,12 @@ border-radius:20px;
 margin-top:10px;
 }
 
+video {
+width:260px;
+border-radius:20px;
+margin-top:10px;
+}
+
 /* fade animation */
 .fade {
 animation: fadeIn 2s ease-in-out;
@@ -121,7 +127,7 @@ color:#555;
 <div id="gallery" class="screen">
 <h1>Our little memories ❤️</h1>
 
-<img id="photo" src="photo1.jpg">
+<div id="mediaContainer"></div>
 <p id="caption" class="caption"></p>
 
 <button onclick="nextPhoto()">Next ➜</button>
@@ -187,8 +193,9 @@ show("story");
 let name=document.getElementById("name");
 let text=document.getElementById("storyText");
 
-typeText(name,"Farax Mohammed Abdulrahman Hadule...",50,()=>{
-typeText(name,"Gerxaches...",60,()=>{
+typeText(name,"Farax Mohammed Abdulrahman",50,()=>{
+typeText(name,"Handule Duale",60,()=>{
+typeText(name,"Gerxaches 💚",80,()=>{
 typeText(name,"Farooha ❤️",80,()=>{
 text.innerHTML="I made this for you… just follow it 😌";
 
@@ -199,12 +206,13 @@ fakeLoading();
 });
 });
 });
+});
 }
 
 /* LOADING */
 let msgs=[
 "Thinking about you...",
-"You make everything softer...",
+"It has been an amazing 1 year and 2 months...",
 "Almost ready..."
 ];
 
@@ -258,8 +266,12 @@ setTimeout(()=>showGallery(),1200);
 }
 
 /* SLIDESHOW */
-let photos=["photo1.jpg","your-photo.jpg","photo2.jpg"];
-let captions=["YOU & ME ❤️","Prettiest eyes in Somaliland 😍","ETHEREAL ✨"];
+let media=[
+{type:"image", src:"Photo 2.jpeg", caption:"YOU & ME ❤️"},
+{type:"image", src:"Photo (3).jpeg", caption:"Prettiest eyes in Somaliland 😍"},
+{type:"video", src:"hodoo audio.mp4", caption:"Listening to your voice 💚"},
+{type:"video", src:"no 2.mp4", caption:"More memories with you 🎵"}
+];
 let index=0;
 
 function showGallery(){
@@ -269,13 +281,28 @@ updatePhoto();
 }
 
 function updatePhoto(){
-document.getElementById("photo").src=photos[index];
-document.getElementById("caption").innerText=captions[index];
+let container=document.getElementById("mediaContainer");
+container.innerHTML="";
+
+let current=media[index];
+
+if(current.type==="image"){
+let img=document.createElement("img");
+img.src=current.src;
+container.appendChild(img);
+} else if(current.type==="video"){
+let video=document.createElement("video");
+video.src=current.src;
+video.controls=true;
+container.appendChild(video);
+}
+
+document.getElementById("caption").innerText=current.caption;
 }
 
 function nextPhoto(){
 index++;
-if(index<photos.length){
+if(index<media.length){
 updatePhoto();
 } else {
 show("voiceGate");
@@ -284,7 +311,7 @@ show("voiceGate");
 
 /* VOICE */
 function playVoiceAndContinue(){
-let audio=new Audio("voice1.mp3");
+let audio=new Audio("hodoo audio.mp4");
 audio.play();
 
 audio.onended=function(){
