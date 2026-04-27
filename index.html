@@ -131,31 +131,8 @@ FARAX MOHAMMED ABDULRAHMAN HANDULE DUALE<br>
 
 <div id="quiz4" class="screen">
 <h1>How much do you love me? 💖</h1>
-<button onclick="next('voice')">∞ Infinity ♾️</button>
-<button onclick="next('voice')">1000 ❤️</button>
-</div>
-
-<!-- VOICE -->
-<div id="voice" class="screen">
-<h1>Voice Messages 🎧</h1>
-
-<audio controls src="voice1.mp3"></audio>
-<audio controls src="voice2.mp3"></audio>
-
-<button onclick="next('music')">Next 💖</button>
-</div>
-
-<!-- 🎵 YOUTUBE MUSIC (ADDED HERE) -->
-<div id="music" class="screen">
-<h1>Our Song 🎵</h1>
-
-<iframe width="0" height="0"
-src="https://www.youtube.com/embed/Pma_IwydPmw?autoplay=1&loop=1"
-frameborder="0"></iframe>
-
-<p>Listening... ❤️</p>
-
-<button onclick="next('gallery')">Next 💖</button>
+<button onclick="next('gallery')">∞ Infinity ♾️</button>
+<button onclick="next('gallery')">1000 ❤️</button>
 </div>
 
 <!-- SLIDESHOW -->
@@ -166,6 +143,28 @@ frameborder="0"></iframe>
 <p id="cap">YOU & ME ❤️</p>
 
 <button onclick="nextSlide()">Next 💖</button>
+</div>
+
+<!-- 🎵 MUSIC (FIXED MP3 VERSION) -->
+<div id="music" class="screen">
+<h1>Our Song 🎵</h1>
+
+<p>Playing our memory ❤️</p>
+
+<audio id="song" controls>
+<source src="music.mp3" type="audio/mpeg">
+Your browser does not support audio.
+</audio>
+
+<button onclick="next('proposal')">Next 💖</button>
+</div>
+
+<!-- PROPOSAL -->
+<div id="proposal" class="screen">
+<h1>💍 Will you stay forever? ❤️</h1>
+
+<button onclick="finalYes()">YES 💖</button>
+<button onclick="finalYes()">ALWAYS 😭❤️</button>
 </div>
 
 <!-- FINAL -->
@@ -209,6 +208,12 @@ I CAN’T WAIT TO SEE YOU IN JULY ❤️
 function next(id){
 show(id);
 spawnHeart();
+
+/* 🎵 AUTO PLAY MUSIC WHEN MUSIC PAGE OPENS */
+if(id === "music"){
+let song = document.getElementById("song");
+song.play().catch(()=>{});
+}
 }
 
 function show(id){
@@ -281,11 +286,17 @@ let i=0;
 function nextSlide(){
 i++;
 if(i>=slides.length){
-next("final");
+next("music");
 return;
 }
 document.getElementById("slide").src=slides[i].img;
 document.getElementById("cap").innerText=slides[i].cap;
+}
+
+/* FINAL */
+function finalYes(){
+spawnBurst();
+setTimeout(()=>next("final"),1000);
 }
 
 </script>
