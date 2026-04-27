@@ -46,15 +46,6 @@ border-radius:20px;
 margin-top:10px;
 }
 
-.fade {
-animation: fadeIn 2s ease-in-out;
-}
-
-@keyframes fadeIn {
-from {opacity:0;}
-to {opacity:1;}
-}
-
 .heart {
 position:absolute;
 animation:float 5s linear infinite;
@@ -75,7 +66,7 @@ color:#555;
 
 <body>
 
-<!-- PASSWORD -->
+<!-- LOGIN -->
 <div id="login" class="screen active">
 <h1>Only you can unlock this 😏</h1>
 <p>What's my favorite nickname for you?</p>
@@ -111,17 +102,15 @@ color:#555;
 <button onclick="love()">SUPER A LOT 😍</button>
 </div>
 
-<!-- SLIDESHOW -->
+<!-- GALLERY -->
 <div id="gallery" class="screen">
 <h1>Our little memories ❤️</h1>
-
 <div id="mediaContainer"></div>
 <p id="caption" class="caption"></p>
-
 <button onclick="nextPhoto()">Next ➜</button>
 </div>
 
-<!-- FINAL MESSAGE -->
+<!-- FINAL -->
 <div id="final" class="screen">
 <h1>💌</h1>
 <p style="font-size:22px;">
@@ -132,91 +121,92 @@ I AM GLAD YOU ARE ON BOARD ❤️
 
 <script>
 
-/* PASSWORD */
-function checkPass(){
-let val=document.getElementById("pass").value.toLowerCase().trim();
-if(val==="farooha"){
-startStory();
-} else {
-alert("Try again 😒");
-}
-}
-
 /* SCREEN SWITCH */
 function show(id){
 document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
-/* TYPE TEXT */
-function typeText(el, text, speed, cb){
-let i=0;
-el.innerHTML="";
-let inter=setInterval(()=>{
-el.innerHTML+=text.charAt(i);
-i++;
-if(i>=text.length){
-clearInterval(inter);
-if(cb) setTimeout(cb,800);
+/* PASSWORD */
+function checkPass(){
+let val = document.getElementById("pass").value.toLowerCase().trim();
+if(val === "farooha"){
+startStory();
+} else {
+alert("Try again 😒");
 }
-},speed);
+}
+
+/* TYPE TEXT (SAFE) */
+function typeText(el, text, speed, cb){
+let i = 0;
+el.textContent = "";
+
+let inter = setInterval(()=>{
+el.textContent += text.charAt(i);
+i++;
+
+if(i >= text.length){
+clearInterval(inter);
+if(cb) setTimeout(cb, 800);
+}
+}, speed);
 }
 
 /* STORY */
 function startStory(){
 show("story");
 
-let name=document.getElementById("name");
-let text=document.getElementById("storyText");
+let name = document.getElementById("name");
+let text = document.getElementById("storyText");
 
-typeText(name,"Farax Mohammed Abdulrahman Handule Duale Gerxaches",50,()=>{
-typeText(name,"Farooha ❤️",80,()=>{
-text.innerHTML="I made this for you… just follow it 😌";
+typeText(name, "Farooha ❤️", 80, ()=>{
+text.textContent = "I made this for you… just follow it 😌";
 
 setTimeout(()=>{
 show("loading");
 fakeLoading();
-},2000);
-});
+}, 2000);
 });
 }
 
 /* LOADING */
-let msgs=[
+let msgs = [
 "Thinking about you...",
-"It has been an amazing 1 year and 2 months... You make life soft, peaceful and worth living 💚",
+"It has been an amazing time with you 💚",
 "Almost ready..."
 ];
 
 function fakeLoading(){
-let i=0;
-let inter=setInterval(()=>{
-document.getElementById("loadingText").innerText=msgs[i];
+let i = 0;
+let inter = setInterval(()=>{
+document.getElementById("loadingText").textContent = msgs[i];
 i++;
-if(i>=msgs.length){
+
+if(i >= msgs.length){
 clearInterval(inter);
 show("quiz");
 askQ();
 }
-},1500);
+}, 1500);
 }
 
-/* QUESTIONS */
-let questions=[
+/* QUIZ */
+let questions = [
 "Do you miss me?",
 "Am I your favorite person?",
 "Do you smile when you see my name?"
 ];
 
-let q=0;
+let q = 0;
 
 function askQ(){
-document.getElementById("question").innerText=questions[q];
+document.getElementById("question").textContent = questions[q];
 }
 
 function nextQ(){
 q++;
-if(q<questions.length){
+if(q < questions.length){
 askQ();
 } else {
 show("finalQ");
@@ -225,7 +215,7 @@ show("finalQ");
 
 /* LOVE */
 function love(){
-for(let i=0;i<70;i++){
+for(let i=0;i<50;i++){
 let h=document.createElement("div");
 h.className="heart";
 h.innerHTML="💖";
@@ -237,46 +227,46 @@ setTimeout(()=>h.remove(),5000);
 setTimeout(()=>showGallery(),1200);
 }
 
-/* SLIDESHOW */
-let media=[
-{type:"image", src:"Photo 1 (1).jpeg", caption:"YOU & ME ❤️"},
-{type:"image", src:"Photo 2.jpeg", caption:"Prettiest eyes in Somaliland 😍"},
-{type:"image", src:"Photo (3).jpeg", caption:"ETHEREAL ✨"},
-{type:"video", src:"hodoo audio.mp4", caption:"Listening to your voice 💚"},
-{type:"video", src:"no 2.mp4", caption:"More memories with you 🎵"}
+/* GALLERY */
+let media = [
+{type:"image", src:"photo1.jpeg", caption:"YOU & ME ❤️"},
+{type:"image", src:"photo2.jpeg", caption:"Your smile 😍"},
+{type:"image", src:"photo3.jpeg", caption:"Perfect ✨"},
+{type:"video", src:"video1.mp4", caption:"Memories 💚"},
+{type:"video", src:"video2.mp4", caption:"More moments 🎵"}
 ];
 
-let index=0;
+let index = 0;
 
 function showGallery(){
 show("gallery");
-index=0;
+index = 0;
 updatePhoto();
 }
 
 function updatePhoto(){
-let container=document.getElementById("mediaContainer");
-container.innerHTML="";
+let container = document.getElementById("mediaContainer");
+container.innerHTML = "";
 
-let current=media[index];
+let current = media[index];
 
-if(current.type==="image"){
-let img=document.createElement("img");
-img.src=current.src;
+if(current.type === "image"){
+let img = document.createElement("img");
+img.src = current.src;
 container.appendChild(img);
 } else {
-let video=document.createElement("video");
-video.src=current.src;
-video.controls=true;
+let video = document.createElement("video");
+video.src = current.src;
+video.controls = true;
 container.appendChild(video);
 }
 
-document.getElementById("caption").innerText=current.caption;
+document.getElementById("caption").textContent = current.caption;
 }
 
 function nextPhoto(){
 index++;
-if(index<media.length){
+if(index < media.length){
 updatePhoto();
 } else {
 show("final");
